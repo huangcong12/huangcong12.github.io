@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="推荐本地开发环境 已完成备案的域名。 一个微信测试公众号（点击申请） 申请natapp（点击注册），购买隧道的时候输入邀请码：9095E9DA，可得九折优惠。 一台电脑  &amp;emsp;&amp;emsp;其实微信官方没有那么多的要求，只要一个域名给到腾讯端能找到你的微信后台，双方完成通信即可。上面的要求只是我们在开发中，总结出来的的一套比较方便开发的环境。需要一个备案域名，这个是毋容置疑的，国内环境大势所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信开发小结">
+<meta property="og:url" content="http://yoursite.com/2017/12/07/微信开发小结/index.html">
+<meta property="og:site_name" content="我也想扯淡">
+<meta property="og:description" content="推荐本地开发环境 已完成备案的域名。 一个微信测试公众号（点击申请） 申请natapp（点击注册），购买隧道的时候输入邀请码：9095E9DA，可得九折优惠。 一台电脑  &amp;emsp;&amp;emsp;其实微信官方没有那么多的要求，只要一个域名给到腾讯端能找到你的微信后台，双方完成通信即可。上面的要求只是我们在开发中，总结出来的的一套比较方便开发的环境。需要一个备案域名，这个是毋容置疑的，国内环境大势所">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8fe82a4egy1fp42gi1glvj20t108rq3n.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8fe82a4egy1fp48s02hakj20ga0ncgna.jpg">
+<meta property="og:updated_time" content="2018-03-07T15:31:49.298Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信开发小结">
+<meta name="twitter:description" content="推荐本地开发环境 已完成备案的域名。 一个微信测试公众号（点击申请） 申请natapp（点击注册），购买隧道的时候输入邀请码：9095E9DA，可得九折优惠。 一台电脑  &amp;emsp;&amp;emsp;其实微信官方没有那么多的要求，只要一个域名给到腾讯端能找到你的微信后台，双方完成通信即可。上面的要求只是我们在开发中，总结出来的的一套比较方便开发的环境。需要一个备案域名，这个是毋容置疑的，国内环境大势所">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8fe82a4egy1fp42gi1glvj20t108rq3n.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/07/微信开发小结/"/>
+
+
+
+
+
+  <title>微信开发小结 | 我也想扯淡</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">我也想扯淡</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/07/微信开发小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我也想扯淡">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">微信开发小结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-07T09:27:51+08:00">
+                2017-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="推荐本地开发环境"><a href="#推荐本地开发环境" class="headerlink" title="推荐本地开发环境"></a>推荐本地开发环境</h2><ul>
+<li>已完成备案的域名。</li>
+<li>一个微信测试公众号（<a href="https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login" target="_blank" rel="noopener">点击申请</a>）</li>
+<li>申请natapp（<a href="https://natapp.cn" target="_blank" rel="noopener">点击注册</a>），购买隧道的时候输入邀请码：9095E9DA，可得九折优惠。</li>
+<li>一台电脑</li>
+</ul>
+<p>&emsp;&emsp;其实微信官方没有那么多的要求，只要一个域名给到腾讯端能找到你的微信后台，双方完成通信即可。上面的要求只是我们在开发中，总结出来的的一套比较方便开发的环境。需要一个备案域名，这个是毋容置疑的，国内环境大势所趋，如果嫌自己备案麻烦，可以找公司经理，让经理用公司的域名，给你开一个二级域名，然后就可以完成这一步骤。再不行可以考虑通过购买natapp卖的二级域名，由于用的人比较多，所以不稳定，会经常被腾讯封。总体来说还是建议自己申请一个域名，毕竟作为一个web开发，有一个域名也是方便很多。<br>&emsp;&emsp;natapp是一个内网映射的工具，它在这里的作用是，把你的电脑上的Web环境，通过域名映射到外网，这样就可以完成腾讯端和你的服务器端通信。natapp不是免费的，如果你有其他方案，也可以使用，但就我们团队使用过内网映射工具，比如花生壳等，还是natapp比较适合开发，很便宜很稳定。从16年开始使用，以前是5块钱一个月，现在涨价了，可以买一年以上的套餐，算下来，一个月才几块钱，可以节约很多折腾的时间，很划算（<a href="https://natapp.cn/article" target="_blank" rel="noopener">natapp官方教程</a>，看不懂可以进群，遇到问题了直接提问）。natapp绑定非它卖的域名，会进行备案验证。<br>&emsp;&emsp;电脑是的LNMP环境大家可以自由发挥，我们团队比较习惯PHPStudy(<a href="http://www.phpstudy.net/" target="_blank" rel="noopener">下载</a>)。</p>
+<h2 id="推荐现流行框架"><a href="#推荐现流行框架" class="headerlink" title="推荐现流行框架"></a>推荐现流行框架</h2><p>&emsp;&emsp;其实业务上的东西，时间就是金钱，这也是PHP的一个优势，用同样是时间，可以完成更多的事情。<br>&emsp;&emsp;微信开发也是，如果能有一个现成框架，里面有基本的用户登录，权限管理，并且有公众号的基本管理功能，那该多好。那样我们在上面进行开发，无论是在开发速度，还是整套系统稳定性上，都会比自己从头开发的好。很幸运，是有的。<br>&emsp;&emsp;但是，有一个大前提，就是你目前的用户量不大。因为就目前现在开源的微信框架，都侧重功能点和可扩展性，没有侧重并发性，所以如果你的公众号用户是百万级别的，还是要慎用这些流行框架，当然也可以改到框架里面的东西，把能优化的点都优化上。</p>
+<ul>
+<li><p>微擎<br>可扩展性：★★★★★<br>稳定性：★★★★<br>高并发性：★<br>&emsp;&emsp;这个是我们团队以前一直用的一个框架，应该也是国内做得比较好的一个框架。整套系统，稳定性一流，可扩展性一流。这个框架的一大优势是，有一个完整的生态圈，里面有很多别人开发好的模块，那些模块界面美观，功能强大，还支持在线安装，也就是你看到好的模块，符合你的业务需求，你只要点一下鼠标，就能安装到你的网站上，然后就能把活动挂到公众号去，想想就兴奋。当然模块有收费的，也有免费的。<br>&emsp;&emsp;如果没有找到符合你们的模块，或者像我们团队一样，购买过几个模块，看过里面的代码，感觉如果要扩展，没有自己写的好，也可以自己写模块，官方的<a href="https://www.kancloud.cn/donknap/we7/136556" target="_blank" rel="noopener">文档</a>还算可以，还有一些大神录的视频<img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp42gi1glvj20t108rq3n.jpg" alt="enter image description here">，跟着做一两个简单的模块，相信你很快能上手，上手后再慢慢摸索框架封装好的一些方法和类库，你会发现这个框架是一个不错的开发框架。</p>
+</li>
+<li><p>微力<br>可扩展性：★★★<br>稳定性：★★★★<br>高并发性：★★★<br>&emsp;&emsp;这并不是一个开源框架，是上一家为客户维护公众号的外包公司留下来的，这是基于比较老的CI框架上的一套公众号系统，没有文档，没有例子，好在整套CI代码没有大改动。<br>&emsp;&emsp;整套系统可以看出有大神的手笔，也有新手的裹脚布，同样有偷工减料的烂尾点。接触半年，从最初的鄙视，到最后的习惯，发现再怎么样，也能接受，毕竟是基于CI，基因在那。<br>&emsp;&emsp;整套系统稳定性一流，响应速度一流，客户共7台机器部署了这套系统，其中2台是微信管理后台，专门用来处理腾讯发送的报文，还有5台用来部署公众号上的活动页面，为公众号500w的用户提供服务。但是每周推推文的时候，高峰期会卡一个小时左右，那时候很多用户进来，会看到空白页面。整套架构，和系统都有很大的优化空间。</p>
+</li>
+</ul>
+<h2 id="推荐中小型高并发架构"><a href="#推荐中小型高并发架构" class="headerlink" title="推荐中小型高并发架构"></a>推荐中小型高并发架构</h2><p>&emsp;&emsp;当你的用户量上来的时候，上面的框架会成为限制你优化的天花板。有点类似大巴和高铁的样子，如果公司平时就几个人坐车，那买个大巴就能满足，简单快捷，投入少见效快。如果用来扛春运，那还是得实事求是的从头设计铁。<br>&emsp;&emsp;现公司用的架构，感觉还是可以满足现状，架构图如下：<img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp48s02hakj20ga0ncgna.jpg" alt="enter image description here"><br>所有机器的代码均用git管理，在内网中找一台机器，当做远程仓库。</p>
+<ul>
+<li><p>微信后台：用于和腾讯服务器通信的集群。这里有一个坑，腾讯发送报文过来的时候，会有个5秒超时的报警，如果5秒内这个集群的机器不能应答报文，那会产生报警，这个报警会发送到一个报警群里，一般群里都有公司经理或老板的人。因此这里关乎大家的年终奖，尽量优化吧。<br>&emsp;&emsp;这里会有两种优化方法，一种是投机法：收到腾讯报文，先返回应答信息，返回完毕后，再处理报文内容。<br>&emsp;&emsp;一种是刚正面法：把整套代码优化，把能缓存的都缓存到redis中，比如：用户openid、用户手机号、活动关键字等等，一个原则就是尽量不碰Mysql库。收到腾讯发来的用户点击行为，先缓存，等到一定时间，再用脚本同步到库中；收到新关注用户也是，先把用户openid添加到整套系统的openid redis库中，待后续脚本同步到Mysql库中。<br>&emsp;&emsp;这里建议在设计系统的时候，两种方法都需要实现，可以在配置文件中配置用哪一种方法，以防应对不便之需。<br>&emsp;&emsp;这一套系统如果可以，一定要用swoole加速，或者直接用swoole框架重新开发一套。</p>
+</li>
+<li><p>业务活动集群：这里主要是活动相关的业务代码，我们在这边开发的原则是，各个活动之间不共享数据，但共用session中用户信息。也就是如果某一个活动报错，不能影响到其他活动。各个活动之间一定要设定开始时间和结束时间。秒杀活动和常驻活动一定更要分开。<br>&emsp;&emsp;这里也有一个大坑，公众号上的活动链接一定不能挂微信的授权链接。可回想一下腾讯网页授权的步骤，第一步是获取code，这个code值其实是和openid关联的，如果挂了授权链接到公众号上，不管你是否已通过身份验证，每次进来都会带着code值。假设有一个用户A，正常进入公众号，授权完成，拿到A的个人信息，A参与活动完成后，关闭网页回到公众号，A发现活动很好玩，推荐B也来参与，B说：“你把链接发过来吧，那个公众号我还得找，多麻烦啊”，这时候A又进入活动页面，又产生了一个code，但是因为A已通过身份验证，所以系统并没有使用这个code，这时候A点击公众号右上方的按钮，再点击复制链接扔给B，B在他的公众号上点击这个这个链接，他会懵圈的，因为这时候，B就看到的信息会是A的。这是一个巨坑，轻则用户信息错乱，引起投诉，重则会涉及钱财等安全问题，后果不堪设想。<br>&emsp;&emsp;这个集群我们团队现在还是推荐使用传统的PHP-FPM方式进行开发，不太建议使用swoole，因为在整个团队还是传统PHP开发思想的前提下，这里如果贸然用swoole，担心不是一个好的方案，因为一个活动设计不好，会导致整个swoole进程内存泄漏或者崩溃掉。</p>
+</li>
+<li><p>数据库层：涉及到数据，最重要是容灾防备，容灾永远放第一位。不管你redis有多快，产生一次崩溃，而数据不能完全恢复，那可能还不如不用。<br>&emsp;&emsp;建议有条件的要上中间件。数据库中间件，如国内较活跃的Mycat数据库中间件，尽管理论上会有性能损耗，可在高并发条件下，重用数据库连接，会起到保护数据库作用。用到中间件，对运维人员要求挺高，还要有DBA也要参与，所以这里写了建议。<br>&emsp;&emsp;公司有DBA，这里是他们的地盘，没研究透，不好意思多写。以后再进行补充。</p>
+</li>
+<li><p>后台集群：后台进程服务器建议上swoole，跑定时任务，跑秒杀送奖品任务，批量下发模板消息，和一些统计数据等，这套系统的稳定性很重要，所以日志需要详细全面，尽量把每一条数据的处理时长、处理结果也进行记录，如果失败，一定要记录失败原因。后台管理服务器因为没有并发，仅仅是方便内网人员对活动配置，或活动数据查看，建议用Laravel这种功能强大、加速开发的开发框架。</p>
+</li>
+</ul>
+<h2 id="聊聊微信特有的高并发"><a href="#聊聊微信特有的高并发" class="headerlink" title="聊聊微信特有的高并发"></a>聊聊微信特有的高并发</h2><p>&emsp;&emsp;和传统淘宝双11活动不一样，微信有一个特有的高并发：每周一次的推文。我们这里习惯性的是每周五。另一个不同点是，传统活动上的高并发活动，仅仅针对一个活动，侧重优化好那个活动即可；而微信上的高并发，是面向所有挂到菜单是的活动，用户会漫无目的的点，看看有没有什么新奇能吸引自己的东西，或者期望发现一些这段时间没有注意到的东西。尽管可以在推文中引导用户到达其中的一个活动，但是用户最终还是会随便点一下公众号上的菜单。<br>&emsp;&emsp;高峰会在推文推出去后的5分钟后出现，在高峰时候，用户点击公众号的一个活动，如果是空白的，他第一反应会是回到公众号，再重新点击进入，这时候如果还是空白，他会回到公众号再点击另外的活动，直至放弃。<br>&emsp;&emsp;假设一个用户最少点击3次公众号上的活动，每进来一次，均会进行用户验证，如果没有缓存有用户数据，仅仅是身份验证这一步，每个用户都去查询Mysql，每进来一次，就连一下Mysql，很快就会导致连接数过多，PHP一直在等待Mysql连接成功，一般这时候的业务活动服务器CPU很高，内存很高。在用户点击公众号的同时，腾讯会发送用户点击事件报文到微信后台服务器，点击3次就发送3次，如果系统在收到用户点击事件报文的时候，马上插入数据库，这样又继续加塞Mysql服务器。这样整套系统的压力会被放大，根本不能缓解，形成了一个越卡越点，越点越卡的局面。<br>&emsp;&emsp;其实这里发现问题后，还是可以解决的。首要是做好用户数据的缓存，把用户数据使用哈希表存好，建议用redis中的一个单独库，比如15库（防止新运维，或者新来的开发，连进来就搞事，选15库，还可以让他们再思考一下），把用户openid当做键，在哈希表中，再用其他一些用户属性作为key，属性值作为field值进行保存。如果查询不到用户信息，再透传缓存，查数据库。<br>&emsp;&emsp;另一个优化点是，活动数据在后台配好的时候，就要缓存好。如果缓存查不到，再查Mysql中的活动配置表，重新构建活动数据放到缓存中。这里查Mysql构建活动数据的时候，一定要进行锁处理，确保10s内同一个活动，只有一个查Mysql构建活动数据。<br>&emsp;&emsp;还有一个，微信管理后台（MP机器）保存的用户行为数据的时候，先把数据缓存，让后台服务器（BG机器）跑定时任务进行保存，无须实时的插库保存。</p>
+<h2 id="聊聊微信问题的排查与测试"><a href="#聊聊微信问题的排查与测试" class="headerlink" title="聊聊微信问题的排查与测试"></a>聊聊微信问题的排查与测试</h2><p>&emsp;&emsp;传统Web项目中，如果测试人员或客户投诉存在某些问题，一般只要问其账号，用他的账号模拟登陆状态，进行问题的排查。同理，我们微信开发也参考此类方式，开一个接口，把需要重现问题用户的openid写到session中，完成模拟登录。但是这些是需要真实用户数据才可以完成，难道要在线上的代码中写这个接口吗？这样如果被别人发现了，岂不是能万能登录了？所以在业务活动集群（DZ机器）中有一台测试机器，这台机器的作用是用来排查bug，和预上线前测试用。这台机器有点特殊，它不接入负载均衡，也就是一般用户在公众号点击活动的时候，是访问不到的。要访问这台机器，需要配置业务活动集群（DZ机器）的Nginx配置，加入如下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  ....</span><br><span class="line">  if ($http_cookie ~* &quot;rewrite=cs&quot;)&#123;</span><br><span class="line">        rewrite ^/ http://测试服务器ip/;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的意思是如果浏览器的请求报文中包含cookie中有rewrite=cs，就转发到测试服务器。这样我们只要在微信开发者工具中，设置一下cookie，就可以用线上的真实数据进行问题排查，并且可以开启框架的debug模式，不用担心影响到线上代码。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&emsp;&emsp;微信接口主要有两种调用方式，一种是用公众号的秘钥appid、appsecret进行验证，这种接口一般是刚开始的验证接口，比如网页授权、获取access_token等。一种是获取公众号功能的接口，这些接口用前面的access_token进行验证，比如获取公众号菜单，获取用户信息等。如果接口调不通，估计是请求方式没对，看看是否是POST，或者参数是JSON格式，你没有封装对，把文档再好好看看，再不行就找谷歌搜索一下。如果还是不行，基本就是上就是你的问题了，上个厕所想想，再回来看，看看哪里犯了低级错误。<br>&emsp;&emsp;如果熟悉了整个微信开发流程，可以到github上去找一些大神封装好的微信操作类，这些类中会把包含所有的接口调用方法，只要传递正确的参数进去即可，这样一来可以节省很多时间。<br>&emsp;&emsp;关于框架的选择，如果是外包公司，不用考虑，选微擎。如果是自己公司，看业务需要，公众号用户没有30w以上，选微擎。超过30w，没有100w，还是可以考虑优化一下微擎，多加几台机器，同时把数据库服务器内存加到64G，还是可以满足需要。用户超过100w后，才需要考虑重新设计整套架构。<br>&emsp;&emsp;日志很重要，活动一定要有日志记录用户操作结果、处理所需时间、失败原因等。我们团队经常比喻日志为英雄联盟里面的真眼，可以通过日志观察用户的一举一动，而且不用担心被拆掉。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/27/远程Linux开发/" rel="next" title="远程Linux开发">
+                <i class="fa fa-chevron-left"></i> 远程Linux开发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">huang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐本地开发环境"><span class="nav-number">1.</span> <span class="nav-text">推荐本地开发环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐现流行框架"><span class="nav-number">2.</span> <span class="nav-text">推荐现流行框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐中小型高并发架构"><span class="nav-number">3.</span> <span class="nav-text">推荐中小型高并发架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聊聊微信特有的高并发"><span class="nav-number">4.</span> <span class="nav-text">聊聊微信特有的高并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聊聊微信问题的排查与测试"><span class="nav-number">5.</span> <span class="nav-text">聊聊微信问题的排查与测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

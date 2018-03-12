@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景&amp;emsp;&amp;emsp;常年混迹小外包公司，接触的项目，有以下特点：项目前期为了方便与客户沟通，也为了让客户看到公司团队人员数量，增加对公司的信任感，公司都会让开发人员跟着去驻点；到了项目跑起来、客户对公司已认可，客户的注意力也往产品上移动以后，公司会安排开发人员离场，进行远程技术支撑，这样公司可以节约更多的人力成本，让开发回到公司，帮忙协助其他项目。也能让开发远离客户的碎碎念，安心开发。&amp;e">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="远程Linux开发">
+<meta property="og:url" content="http://yoursite.com/2017/06/27/远程Linux开发/index.html">
+<meta property="og:site_name" content="我也想扯淡">
+<meta property="og:description" content="背景&amp;emsp;&amp;emsp;常年混迹小外包公司，接触的项目，有以下特点：项目前期为了方便与客户沟通，也为了让客户看到公司团队人员数量，增加对公司的信任感，公司都会让开发人员跟着去驻点；到了项目跑起来、客户对公司已认可，客户的注意力也往产品上移动以后，公司会安排开发人员离场，进行远程技术支撑，这样公司可以节约更多的人力成本，让开发回到公司，帮忙协助其他项目。也能让开发远离客户的碎碎念，安心开发。&amp;e">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9tw4t54uj20x30ovq3k.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9t42ntc2g20k00dwhb6.gif">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9u2q8g6zj20x30ov0ts.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9u9leswmj20x00rfdgv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9v7px3qkj218c0hvacj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9ut5vwfnj21960htgob.jpg">
+<meta property="og:updated_time" content="2018-03-12T03:44:37.369Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="远程Linux开发">
+<meta name="twitter:description" content="背景&amp;emsp;&amp;emsp;常年混迹小外包公司，接触的项目，有以下特点：项目前期为了方便与客户沟通，也为了让客户看到公司团队人员数量，增加对公司的信任感，公司都会让开发人员跟着去驻点；到了项目跑起来、客户对公司已认可，客户的注意力也往产品上移动以后，公司会安排开发人员离场，进行远程技术支撑，这样公司可以节约更多的人力成本，让开发回到公司，帮忙协助其他项目。也能让开发远离客户的碎碎念，安心开发。&amp;e">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9tw4t54uj20x30ovq3k.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/27/远程Linux开发/"/>
+
+
+
+
+
+  <title>远程Linux开发 | 我也想扯淡</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">我也想扯淡</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/27/远程Linux开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我也想扯淡">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">远程Linux开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-27T21:35:06+08:00">
+                2017-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>&emsp;&emsp;常年混迹小外包公司，接触的项目，有以下特点：项目前期为了方便与客户沟通，也为了让客户看到公司团队人员数量，增加对公司的信任感，公司都会让开发人员跟着去驻点；到了项目跑起来、客户对公司已认可，客户的注意力也往产品上移动以后，公司会安排开发人员离场，进行远程技术支撑，这样公司可以节约更多的人力成本，让开发回到公司，帮忙协助其他项目。也能让开发远离客户的碎碎念，安心开发。<br>&emsp;&emsp;开发人员回到公司以后，怎么保持在现场那样的效率呢？如果有问题出现了，怎么能在最短的时间发现问题，解决问题呢？怎么能在最短时间内进行版本升级呢？怎么维持客户对公司的信任感呢？如果单单靠一个在项目本地招的运维，那要肯定的答案肯定很难。好在我们可以使用技术改变这些情况。</p>
+<h2 id="为啥要远程Linux进行开发"><a href="#为啥要远程Linux进行开发" class="headerlink" title="为啥要远程Linux进行开发"></a>为啥要远程Linux进行开发</h2><p>答：为了不需要再往客户那边跑。</p>
+<h2 id="连接工具"><a href="#连接工具" class="headerlink" title="连接工具"></a>连接工具</h2><p>&emsp;&emsp;xshell？putty？这些工具不行吗？正常情况这些也是可以的。<br>&emsp;&emsp;有一种情况是，客户对外只开放了80端口，你如果要进入，需要到他们内网。只给了80端口？那还有什么办法进行远程连接吗？答案是有的，用Nginx转发到<a href="https://github.com/shellinabox/shellinabox" target="_blank" rel="noopener">shell in a box</a>这款工具能满足（<a href="https://linux.cn/article-6046-1.html" target="_blank" rel="noopener">中文注解</a>）。<br><img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9tw4t54uj20x30ovq3k.jpg" alt="enter image description here"><br>官方Github上的动图，看起来好酷炫。<br><img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9t42ntc2g20k00dwhb6.gif" alt="enter image description here"><br>这里就不对工具的安装展开说明了，需要的朋友，可以谷歌一下教程。<br>用这款工具得注意的点：<br>1.安全问题。一定要注意安全性，不用了就把nainx的转发给关了。转发URL参数一定要长，且无规则。<br>2.工具不支持root登录，需要客户那边同意新建用户。有些客户给了跳板机，不给用户账号密码，那也这个工具也不能满足。<br>3.不支持rz，sz上传下载文件。</p>
+<h2 id="对开发环境调优"><a href="#对开发环境调优" class="headerlink" title="对开发环境调优"></a>对开发环境调优</h2><p>&emsp;&emsp;上面远程连接上去，仅仅一个窗口操作，还是很麻烦，如果想要再来一个shell窗口，就要多开一个浏览器窗口，有没有更好一点的方式？答案有的，该<a href="https://github.com/tmux/tmux" target="_blank" rel="noopener">tmux</a>这个上场了。这个工具支持一个shell窗口里面，模拟出更多的shell窗口。类似于<img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9u2q8g6zj20x30ov0ts.jpg" alt="enter image description here"><br>这个工具有一个对于我们远程开发很好的地方：进入上次回话（tmux attach命令），此功能可以提升效率，一定要用好。<br>比如现在关掉网页，用xshell登录，然后输入tmux attach<br><img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9u9leswmj20x00rfdgv.jpg" alt="enter image description here"><br>又进入了上次我们的回话，是不是感觉很方便。<br>缺点：<br>1.不支持rz，sz上传下载文件。</p>
+<h2 id="有用的命令"><a href="#有用的命令" class="headerlink" title="有用的命令"></a>有用的命令</h2><h3 id="关键字查找"><a href="#关键字查找" class="headerlink" title="关键字查找"></a>关键字查找</h3><p>&emsp;&emsp;经常碰到这样的场景，需要在一堆文件中查找某一个关键字。比如在一个框架里面查找数据库账号密码是在哪个文件里面。如果是本地用PHPStorm、Sublime那就很简单，随便一搜索就出来。但是线上的该怎么搜呢。<br>1.find命令。<br>find . -type f | xargs grep “database”：这是两个命令组成的功能，find . -type f的意思是，递归找到当前文件夹下的所有文件名。然后这一个“|”就把找到的文件名放入管道。xargs就把管道中的文件名一个个取出来，每一个都分别运行‘grep “database”’，类似一个for循环。这样就把框架里面的文件都找了一遍了。<img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9v7px3qkj218c0hvacj.jpg" alt="enter image description here"></p>
+<p>2.grep命令。其实可以直接使用grep命令。<br>grep -Rn “database” . ：在当前文件下找包含关键字的文件。R参数的递归，n是列出行号。<img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9ut5vwfnj21960htgob.jpg" alt="enter image description here">两个命令都差不多。以前没会第二个的时候，经常用第一个，现在用第二个的多点。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/07/微信开发小结/" rel="prev" title="微信开发小结">
+                微信开发小结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">huang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为啥要远程Linux进行开发"><span class="nav-number">2.</span> <span class="nav-text">为啥要远程Linux进行开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接工具"><span class="nav-number">3.</span> <span class="nav-text">连接工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对开发环境调优"><span class="nav-number">4.</span> <span class="nav-text">对开发环境调优</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有用的命令"><span class="nav-number">5.</span> <span class="nav-text">有用的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字查找"><span class="nav-number">5.1.</span> <span class="nav-text">关键字查找</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
