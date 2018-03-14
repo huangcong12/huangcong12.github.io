@@ -313,7 +313,7 @@
 <li><p>微力<br>可扩展性：★★★<br>稳定性：★★★★<br>高并发性：★★★<br>&emsp;&emsp;这并不是一个开源框架，是上一家为客户维护公众号的外包公司留下来的，这是基于比较老的CI框架上的一套公众号系统，没有文档，没有例子，好在整套CI代码没有大改动。<br>&emsp;&emsp;整套系统可以看出有大神的手笔，也有新手的裹脚布，同样有偷工减料的烂尾点。接触半年，从最初的鄙视，到最后的习惯，发现再怎么样，也能接受，毕竟是基于CI，基因在那。<br>&emsp;&emsp;整套系统稳定性一流，响应速度一流，客户共7台机器部署了这套系统，其中2台是微信管理后台，专门用来处理腾讯发送的报文，还有5台用来部署公众号上的活动页面，为公众号500w的用户提供服务。但是每周推推文的时候，高峰期会卡一个小时左右，那时候很多用户进来，会看到空白页面。整套架构，和系统都有很大的优化空间。</p>
 </li>
 </ul>
-<h2 id="推荐中小型高并发架构"><a href="#推荐中小型高并发架构" class="headerlink" title="推荐中小型高并发架构"></a>推荐中小型高并发架构</h2><p>&emsp;&emsp;当你的用户量上来的时候，上面的框架会成为限制你优化的天花板。有点类似大巴和高铁的样子，如果公司平时就几个人坐车，那买个大巴就能满足，简单快捷，投入少见效快。如果用来扛春运，那还是得实事求是的从头设计铁。<br>&emsp;&emsp;现公司用的架构，感觉还是可以满足现状，架构图如下：<img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp48s02hakj20ga0ncgna.jpg" alt="enter image description here"><br>所有机器的代码均用git管理，在内网中找一台机器，当做远程仓库。</p>
+<h2 id="推荐中小型高并发架构"><a href="#推荐中小型高并发架构" class="headerlink" title="推荐中小型高并发架构"></a>推荐中小型高并发架构</h2><p>&emsp;&emsp;当你的用户量上来的时候，上面的框架会成为限制你优化的天花板。有点类似大巴和高铁的样子，如果公司平时就几个人坐车，那买个大巴就能满足，简单快捷，投入少见效快。如果用来扛春运，那还是得实事求是的从头设计高铁。<br>&emsp;&emsp;现公司用的架构，感觉还是可以满足现状，架构图如下：<img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp48s02hakj20ga0ncgna.jpg" alt="enter image description here"><br>所有机器的代码均用git管理，在内网中找一台机器，当做远程仓库。</p>
 <ul>
 <li><p>微信后台：用于和腾讯服务器通信的集群。这里有一个坑，腾讯发送报文过来的时候，会有个5秒超时的报警，如果5秒内这个集群的机器不能应答报文，那会产生报警，这个报警会发送到一个报警群里，一般群里都有公司经理或老板的人。因此这里关乎大家的年终奖，尽量优化吧。<br>&emsp;&emsp;这里会有两种优化方法，一种是投机法：收到腾讯报文，先返回应答信息，返回完毕后，再处理报文内容。<br>&emsp;&emsp;一种是刚正面法：把整套代码优化，把能缓存的都缓存到redis中，比如：用户openid、用户手机号、活动关键字等等，一个原则就是尽量不碰Mysql库。收到腾讯发来的用户点击行为，先缓存，等到一定时间，再用脚本同步到库中；收到新关注用户也是，先把用户openid添加到整套系统的openid redis库中，待后续脚本同步到Mysql库中。<br>&emsp;&emsp;这里建议在设计系统的时候，两种方法都需要实现，可以在配置文件中配置用哪一种方法，以防应对不便之需。<br>&emsp;&emsp;这一套系统如果可以，一定要用swoole加速，或者直接用swoole框架重新开发一套。</p>
 </li>
@@ -489,6 +489,125 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/01/PHP脚本导大批量数据到Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我也想扯淡">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/01/PHP脚本导大批量数据到Redis/" itemprop="url">PHP脚本导大批量数据到Redis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-01T10:09:53+08:00">
+                2016-10-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -535,7 +654,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
