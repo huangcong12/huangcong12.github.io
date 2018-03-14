@@ -181,7 +181,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -191,7 +191,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -257,7 +257,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-07T09:27:51+08:00">
                 2017-12-07
@@ -408,7 +408,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-09T21:35:06+08:00">
                 2017-06-09
@@ -456,7 +456,7 @@
 <p>装好后，在浏览器输入域名，后面接上上面的转发参数，就可以看到这款仿终端工具的庐山真面目。<br><img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9tw4t54uj20x30ovq3k.jpg" alt="enter image description here"><br>官方Github上的动图，看起来好酷炫。<br><img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9t42ntc2g20k00dwhb6.gif" alt="enter image description here"><br>这里就不对工具的安装展开说明了，需要的朋友，可以谷歌一下教程。<br>用这款工具得注意的点：<br>1.安全问题。一定要注意安全性，不用了就把nainx的转发给关了。转发URL参数一定要长，且无规则。<br>2.工具不支持root用户登录，需要客户那边同意新建用户才可以，这个要确认清楚，有些客户可能会不同意新建用户。还有些客户给了跳板机，不给用户账号密码，那这个工具也不能满足。<br>3.不支持rz，sz上传下载文件。<br>4.中文直接输入样式会变乱，可以在页面中右键选粘贴功能，出现输入框后再输入中文。</p>
 <h2 id="对开发环境调优"><a href="#对开发环境调优" class="headerlink" title="对开发环境调优"></a>对开发环境调优</h2><p>&emsp;&emsp;远程连接上去了，但是只有一个窗口操作，如果想要再来一个shell窗口，就要多开一个浏览器窗口，好麻烦。有没有更好一点的方式？有，该<a href="https://github.com/tmux/tmux" target="_blank" rel="noopener">tmux</a>(<a href="https://zh.wikipedia.org/wiki/Tmux" target="_blank" rel="noopener">wiki</a>)这个上场了。这个工具支持一个shell窗口里面，模拟出更多的shell窗口。这个工具很有名，经常有文章推荐，详细用法可以谷歌找一下教程，花30分钟看一下，再跟着操作一下，基本能用起来。安装好以后，直接输入tmux，看到底部出现绿色的小条，这就是进入这个tmux环境了。<br><img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9u2q8g6zj20x30ov0ts.jpg" alt="enter image description here"><br>&emsp;&emsp;这个工具有一个对于我们远程开发很好的地方：进入上次回话（tmux attach命令），此功能可以提升效率，一定要用好。<br>比如现在关掉网页，用xshell登录，然后输入tmux attach<br><img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9u9leswmj20x00rfdgv.jpg" alt="enter image description here"><br>xshell直接进入了我们在shell in a box工具里面的窗口中，是不是感觉好强大。这样我们可以直接进入上次的环境中，而不用再进入目录，打开文件，节省了好多脑力。<br>缺点：<br>1.不支持rz，sz上传下载文件。</p>
 <h2 id="有用的命令"><a href="#有用的命令" class="headerlink" title="有用的命令"></a>有用的命令</h2><h3 id="关键字查找"><a href="#关键字查找" class="headerlink" title="关键字查找"></a>关键字查找</h3><p>&emsp;&emsp;经常碰到这样的场景，需要在一堆文件中查找某一个关键字。比如在一个框架里面查找数据库账号密码是在哪个文件里面。如果是本地用PHPStorm、Sublime那就很简单，随便一搜索就出来。但是线上的终端环境该怎么搜呢。<br>1.find命令。<br>find . -type f | xargs grep “database”：这是两个命令组成的功能，find . -type f的意思是，递归找到当前文件夹下的所有文件名。然后这一个“|”就把找到的文件名放入管道。xargs就把管道中的文件名一个个取出来，每一个都分别运行‘grep “database”’，类似一个for循环。这样就把框架里面的文件都找了一遍了。<img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9v7px3qkj218c0hvacj.jpg" alt="enter image description here"></p>
-<p>2.grep命令。其实可以直接使用grep命令。<br>grep -Rn “database” . ：在当前文件下找包含关键字的文件。R参数的递归，n是列出行号。<img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9ut5vwfnj21960htgob.jpg" alt="enter image description here">两个命令都差不多。以前没会第二个的时候，经常用第一个，现在用第二个的多点。</p>
+<p>2.grep命令。其实可以直接使用grep命令。<br>grep -Rn “database” . ：在当前文件下找包含关键字的文件。R参数的递归，n是列出行号。<img src="http://ww1.sinaimg.cn/large/8fe82a4egy1fp9ut5vwfnj21960htgob.jpg" alt="enter image description here">两个命令都差不多。以前没会第二个的时候，经常用第一个，现在用第二个的多点。<br>&emsp;&emsp;未完待续…</p>
 
           
         
@@ -534,7 +534,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-01T10:09:53+08:00">
                 2016-10-01
@@ -658,7 +658,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -671,7 +671,7 @@
               <div class="site-state-item site-state-tags">
                 
                   <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-name">tags</span>
                 
               </div>
             
@@ -717,7 +717,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
