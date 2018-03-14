@@ -79,14 +79,17 @@
 
 
 
+<meta name="description" content="&amp;emsp;&amp;emsp;本来脚本这种需求，用python比较好，每台Linux服务器都有python，方便快捷，可移植性也强。无奈服务器python没有操作redis的模块，又因时间紧，压力大，运维哥哥也不乐意随便让我们安装，回头一想，PHP也是脚本语言，而且服务器版本都有安装redis模块，开工开工。 数据条件： 1、来源：gz文件，数据格式为一个号码拼接一串个人信息的字符串，每一行类似“188">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP脚本导大批量数据到Redis">
 <meta property="og:url" content="http://yoursite.com/2016/10/01/PHP脚本导大批量数据到Redis/index.html">
 <meta property="og:site_name" content="我也想扯淡">
-<meta property="og:updated_time" content="2018-03-12T07:53:00.761Z">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本来脚本这种需求，用python比较好，每台Linux服务器都有python，方便快捷，可移植性也强。无奈服务器python没有操作redis的模块，又因时间紧，压力大，运维哥哥也不乐意随便让我们安装，回头一想，PHP也是脚本语言，而且服务器版本都有安装redis模块，开工开工。 数据条件： 1、来源：gz文件，数据格式为一个号码拼接一串个人信息的字符串，每一行类似“188">
+<meta property="og:updated_time" content="2018-03-14T08:25:26.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP脚本导大批量数据到Redis">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本来脚本这种需求，用python比较好，每台Linux服务器都有python，方便快捷，可移植性也强。无奈服务器python没有操作redis的模块，又因时间紧，压力大，运维哥哥也不乐意随便让我们安装，回头一想，PHP也是脚本语言，而且服务器版本都有安装redis模块，开工开工。 数据条件： 1、来源：gz文件，数据格式为一个号码拼接一串个人信息的字符串，每一行类似“188">
 
 
 
@@ -182,7 +185,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -192,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -256,7 +259,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-01T10:09:53+08:00">
                 2016-10-01
@@ -296,7 +299,50 @@
       
 
       
-        
+        <p>&emsp;&emsp;本来脚本这种需求，用python比较好，每台Linux服务器都有python，方便快捷，可移植性也强。无奈服务器python没有操作redis的模块，又因时间紧，压力大，运维哥哥也不乐意随便让我们安装，回头一想，PHP也是脚本语言，而且服务器版本都有安装redis模块，开工开工。</p>
+<pre><code>数据条件：
+1、来源：gz文件，数据格式为一个号码拼接一串个人信息的字符串，每一行类似“18888888888|上月消费|其他属性1|其他属性2|其他属性3|其他属性4|其他属性5|其他属性6|其他属性7|其他属性8”
+2、数据量：2600w
+3、时间：越快越好。主要是数据量大、且不重要，因此不纳入备份；当Redis崩掉后，重新写入数据的时间不能太长。
+</code></pre><h4 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h4><ul>
+<li>数据的来源，是gz文件？怎么取数据呢</li>
+<li>Redis导入大量数据的话，可以用管道，很快的，可用上</li>
+<li>PHP有个生成器，用来取数据很好用，可用上</li>
+</ul>
+<p>PHP生成器 + Redis管道，这是第一反应能想到的最快的了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">// 文件名</span><br><span class="line">$fileName = &apos;/data/logs/weili_sz/stat/dsjzd_gz_file/BIGDATABILL.1711.gz&apos;;</span><br><span class="line">// Redis服务器信息</span><br><span class="line">$redisHostInfo = [&apos;HOST&apos; =&gt; &apos;127.0.0.1&apos;, &apos;PORT&apos; =&gt; 6379];</span><br><span class="line"></span><br><span class="line">// 1.读取数据</span><br><span class="line">$gzResult = getGzipLine($fileName);</span><br><span class="line">// 2.连上Redis</span><br><span class="line">$client = clientRedis($redisHostInfo);</span><br><span class="line">// 3.放东西到Redis中</span><br><span class="line">putToRedis($client, $gzResult);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 连接Redis服务器</span><br><span class="line"> *</span><br><span class="line"> * @param $redisHostInfo</span><br><span class="line"> * @return Redis</span><br><span class="line"> */</span><br><span class="line">function clientRedis($redisHostInfo)</span><br><span class="line">&#123;</span><br><span class="line">    $redis = new Redis();</span><br><span class="line">    $redis-&gt;connect($redisHostInfo[&apos;HOST&apos;], $redisHostInfo[&apos;PORT&apos;]);</span><br><span class="line">    $redis-&gt;select(15);</span><br><span class="line">    return $redis;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 数据放到Redis中</span><br><span class="line"> *</span><br><span class="line"> * @param $client</span><br><span class="line"> * @param $key</span><br><span class="line"> * @param $hkey</span><br><span class="line"> * @param $hvalue</span><br><span class="line"> */</span><br><span class="line">function putToRedis($client, $info)</span><br><span class="line">&#123;</span><br><span class="line">    $pipe = $client-&gt;multi(Redis::PIPELINE);</span><br><span class="line">    foreach ($info AS $line) &#123;</span><br><span class="line">        $mobi = substr($line, 0, 11);</span><br><span class="line">        $userStr = substr($line, 12, -1);</span><br><span class="line">        $pipe-&gt;hset($mobi, &apos;userStr&apos;, $userStr);</span><br><span class="line">    &#125;</span><br><span class="line">    $result = $pipe-&gt;exec();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 读取gzip文件</span><br><span class="line"> *</span><br><span class="line"> * @param $fileName</span><br><span class="line"> * @return Generator</span><br><span class="line"> */</span><br><span class="line">function getGzipLine($fileName)</span><br><span class="line">&#123;</span><br><span class="line">    $file = gzopen($fileName, &apos;rb&apos;);</span><br><span class="line">    if (file_exists($fileName)) &#123;</span><br><span class="line">        while (!gzeof($file)) &#123;</span><br><span class="line">            yield iconv(&quot;gb2312&quot;, &quot;utf-8&quot;, gzgets($file));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &apos;文件不存在：&apos; . $fileName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;运行，报了内存溢出错误。</p>
+<pre><code>$ php hand.php
+Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 65011720 bytes) in E:\MyFile\code\guanwang\public\hand.php on line 42
+</code></pre><p>看来Redis管道需要把数据都放内存里面，收到提交命令后才把内存里面的数据都提交到服务器上。这也好办，把内存给大一点就好了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ini_set(&apos;memory_limit&apos;, &apos;4096M&apos;);</span><br></pre></td></tr></table></figure></p>
+<p>把上面的这行代码加到脚本第一行，运行脚本</p>
+<pre><code>$ php hand.php
+PHP Fatal error:  Allowed memory size of 2097152 bytes exhausted (tried to allocate 1495040 bytes) in E:\MyFile\code\guanwang\public\hand.php on line 45
+Fatal error: Allowed memory size of 2097152 bytes exhausted (tried to allocate 1495040 bytes) in E:\MyFile\code\guanwang\public\hand.php on line 45
+</code></pre><p>gzip里面的东西，解压出来，也就1个G，怎么给了4个G的内存空间还是报错呢。而且这次是两条错误，一模一样的错误。先不研究这个，时间紧，给到10G试试</p>
+<pre><code>$ php hand.php
+
+VirtualAlloc() failed: [0x00000008] 存储不足，无法处理此命令。
+
+
+VirtualAlloc() failed: [0x00000008] 存储不足，无法处理此命令。
+
+PHP Fatal error:  Out of memory (allocated 341835776) (tried to allocate 337641539 bytes) in E:\MyFile\code\guanwang\public\hand.php on line 45
+
+Fatal error: Out of memory (allocated 341835776) (tried to allocate 337641539 bytes) in E:\MyFile\code\guanwang\public\hand.php on line 45
+</code></pre><p>10G都不行，有点蒙圈，还是内存溢出的问题，为什么这次的错又不一样，同样的错，还有不一样的提示？谷歌一下：<a href="https://stackoverflow.com/questions/44491893/virtualalloc-failed-0x00000008-not-enough-storage-is-available-to-process-t" target="_blank" rel="noopener">stackoverflow</a>上有大神碰到这种情况，就一个回答，但是回答说他没有解决，只是记录了一些他踩过的坑，希望别人别浪费时间踩他已经踩过的坑。<br>&emsp;&emsp;跟着谷歌转了一圈，期间经理来电，询问进度，提醒时间紧急，望速上线先跑几个测试数据。为了不在这个问题上耗费过多时间，就说可以先上线跑，先不用Redis管道功能，一行一行提交。代码的putToRedis方法马上调整为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function putToRedis($client, $info)</span><br><span class="line">&#123;</span><br><span class="line">    foreach ($info AS $line) &#123;</span><br><span class="line">        $mobi = substr($line, 0, 11);</span><br><span class="line">        $userStr = substr($line, 12, -1);</span><br><span class="line">        $client-&gt;hset($mobi, &apos;userStr&apos;, $userStr);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>脚本跑起来，看数据也有了。心里总算松了口气，可以出去抽根烟了。<br>&emsp;&emsp;抽完回来一想，不对啊。为啥人家用管道，我也用管道，我就出现了这个问题呢。又重新谷歌了一下管道的使用方式，看了几个博客，清一色的都是这样的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php   </span><br><span class="line">$redis = new Redis();   </span><br><span class="line">$redis-&gt;connect(&apos;10.1.132.86&apos;, 6379);    </span><br><span class="line">$pipe = $redis-&gt;multi(Redis::PIPELINE);   </span><br><span class="line">for ($i = 0; $i &lt;  10000; $i++) &#123;   </span><br><span class="line">    $pipe-&gt;set(&quot;key::$i&quot;, str_pad($i, 4, &apos;0&apos;, 0));   </span><br><span class="line">    $pipe-&gt;get(&quot;key::$i&quot;);   </span><br><span class="line">&#125;   </span><br><span class="line">      </span><br><span class="line">$replies = $pipe-&gt;exec(); echo &quot; &quot;; print_r($replies);</span><br></pre></td></tr></table></figure></p>
+<p>都是把管道的好处说一下，然后把上面的测试代码一贴，再把时间打印，然后说：“你看，管道多快啊。”再有就把Redis的官方对“管道”的解析贴上。简简单单，但看得那是云里雾里，代码也就这样，为什么就我出问题，进行不下去了呢。难道是数据量的问题？<br>&emsp;&emsp;曾有一个Java大神对我说，他用管道，从来不考虑数据量，开启管道，然后导数据，导完了提交，就这么简单，时间都是几分钟完事，提醒我要用管道。当时听完，我默默佩服，还有这样玩的，胆子真肥，不怕崩掉吗。从侧面看，我也就知道了Redis还能这样，以后我也不考虑数据量了。但现在的情况是，内存溢出了，得考虑数据量。<br>&emsp;&emsp;又看了一下正在跑的脚本，平均每秒1000条，这速度感觉不慢。拿计算器一算，2600w，每秒1000条，得7个小时，这还是慢。出问题了，这导入速度不给客户投诉死，不行，不行，还是得用管道。<br>&emsp;&emsp;又回到了上面没改之前的脚本，思考一下，感觉还是得从报错开始找原因。上面有报了一个中文错误“VirtualAlloc() failed: [0x00000008] 存储不足，无法处理此命令。”    。PHP没有听过VirtualAlloc()这个方法，一查知道了，这个是C运行库申请内存的函数。这个错，看来不是PHP报的，是Redis扩展报的吧？还是Redis本身报的呢？这就扯远了，都快打到他们老家去了。不能往这方面再深入了，这样下去，得改源码去了。<br>&emsp;&emsp;其实还有一个曲线救国的方法。我控制每次只给500w管道他们提交就行了吧。于是putToRedis()方法变成了这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 数据放到Redis中</span><br><span class="line"> *</span><br><span class="line"> * @param $client</span><br><span class="line"> * @param $key</span><br><span class="line"> * @param $hkey</span><br><span class="line"> * @param $hvalue</span><br><span class="line"> */</span><br><span class="line">function putToRedis($client, $info)</span><br><span class="line">&#123;</span><br><span class="line">    $pipe = $client-&gt;multi(Redis::PIPELINE);</span><br><span class="line">    $i = 1;</span><br><span class="line">    foreach ($info AS $line) &#123;</span><br><span class="line">        $mobi = substr($line, 0, 11);</span><br><span class="line">        $userStr = substr($line, 12, -1);</span><br><span class="line">        $pipe-&gt;hset($mobi, &apos;userStr&apos;, $userStr);</span><br><span class="line">        // 控流，500w提交一次</span><br><span class="line">        if ($i % 5000000 == 0) &#123;</span><br><span class="line">            $pipe-&gt;exec();</span><br><span class="line">            $i = 1;</span><br><span class="line">        &#125;</span><br><span class="line">        $i++;</span><br><span class="line">    &#125;</span><br><span class="line">    $pipe-&gt;exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行后，返回：</p>
+<pre><code>$ php hand.php
+VirtualAlloc() failed: [0x00000008] 存储不足，无法处理此命令。
+VirtualAlloc() failed: [0x00000008] 存储不足，无法处理此命令。
+PHP Fatal error:  Out of memory (allocated 348127232) (tried to allocate 343932960 bytes) in E:\MyFile\code\guanwang\public\hand.php on line 46
+Fatal error: Out of memory (allocated 348127232) (tried to allocate 343932960 bytes) in E:\MyFile\code\guanwang\public\hand.php on line 46
+</code></pre><p>还是这个错，难道500w都算多吗，那降点。250w吧。<br>&emsp;&emsp;250w可以，数据量正常。观察了一会，发现有点怪，为啥250w后面慢了？代码没bug吧，也没看花眼吧。为啥现在蹦一次不是250w了，我明明设定250w提交一次，这是什么原因呢。第一次是按照我们的想法来的，代码正常，第二次也是走一样的代码，不正常。<br>&emsp;&emsp;一顿晕头转向后，有了点模糊方向，对比了一下Mysql的事务处理，开启事务后，提交一次，这个事务就没了。这个Redis管道是不是一样的原理呢？死马当活马医试试吧。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 控流，500w提交一次</span><br><span class="line">if ($i % 2500000 == 0) &#123;</span><br><span class="line">    $pipe-&gt;exec();</span><br><span class="line">    $pipe = $client-&gt;multi(Redis::PIPELINE);</span><br><span class="line">    $i = 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>添加了一句代码，每次提交后，重新开启管道。运行看数据，泪流满面，数据正常了，总算是按照我们的想法运行了。把ini_set(‘memory_limit’, ‘10240M’);这句话去掉以后，250w也不行了，改到100w都不行，还是留着吧，这脚本不能随便跑，内存大户。<br>加上问题提示和时间统计后，正常脚本代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">// 文件名</span><br><span class="line">$fileName = &apos;/data/logs/weili_sz/stat/dsjzd_gz_file/BIGDATABILL.1711.gz&apos;;</span><br><span class="line">// Redis服务器信息</span><br><span class="line">$redisHostInfo = [&apos;HOST&apos; =&gt; &apos;127.0.0.1&apos;, &apos;PORT&apos; =&gt; 6379];</span><br><span class="line"></span><br><span class="line">echo &apos;脚本开始运行...&apos; . PHP_EOL;</span><br><span class="line">$startTime = microtime(true);</span><br><span class="line">ini_set(&apos;memory_limit&apos;, &apos;10240M&apos;);</span><br><span class="line"></span><br><span class="line">// 1.读取数据</span><br><span class="line">$gzResult = getGzipLine($fileName);</span><br><span class="line">// 2.连上Redis</span><br><span class="line">$client = clientRedis($redisHostInfo);</span><br><span class="line">// 3.放东西到Redis中</span><br><span class="line">putToRedis($client, $gzResult);</span><br><span class="line"></span><br><span class="line">$endTime = microtime(true);</span><br><span class="line">echo &apos;脚本运行完毕，耗时：&apos; . ($endTime - $startTime) . &apos;秒&apos;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 连接Redis服务器</span><br><span class="line"> *</span><br><span class="line"> * @param $redisHostInfo</span><br><span class="line"> * @return Redis</span><br><span class="line"> */</span><br><span class="line">function clientRedis($redisHostInfo)</span><br><span class="line">&#123;</span><br><span class="line">    $redis = new Redis();</span><br><span class="line">    $redis-&gt;connect($redisHostInfo[&apos;HOST&apos;], $redisHostInfo[&apos;PORT&apos;]);</span><br><span class="line">    $redis-&gt;select(15);</span><br><span class="line">    return $redis;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 数据放到Redis中</span><br><span class="line"> *</span><br><span class="line"> * @param $client</span><br><span class="line"> * @param $key</span><br><span class="line"> * @param $hkey</span><br><span class="line"> * @param $hvalue</span><br><span class="line"> */</span><br><span class="line">function putToRedis($client, $info)</span><br><span class="line">&#123;</span><br><span class="line">    $pipe = $client-&gt;multi(Redis::PIPELINE);</span><br><span class="line">    $i = 1;</span><br><span class="line">    foreach ($info AS $line) &#123;</span><br><span class="line">        $mobi = substr($line, 0, 11);</span><br><span class="line">        $userStr = substr($line, 12, -1);</span><br><span class="line">        $pipe-&gt;hset($mobi, &apos;userStr&apos;, $userStr);</span><br><span class="line">        // 控流，250w提交一次</span><br><span class="line">        if ($i % 2500000 == 0) &#123;</span><br><span class="line">            $pipe-&gt;exec();</span><br><span class="line">            echo &apos;脚本满足条件提交...&apos; . PHP_EOL;</span><br><span class="line">            $pipe = $client-&gt;multi(Redis::PIPELINE);</span><br><span class="line">            $i = 1;</span><br><span class="line">        &#125;</span><br><span class="line">        $i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    echo &apos;脚本最后提交&apos; . PHP_EOL;</span><br><span class="line">    $pipe-&gt;exec();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 读取gzip文件</span><br><span class="line"> *</span><br><span class="line"> * @param $fileName</span><br><span class="line"> * @return Generator</span><br><span class="line"> */</span><br><span class="line">function getGzipLine($fileName)</span><br><span class="line">&#123;</span><br><span class="line">    $file = gzopen($fileName, &apos;rb&apos;);</span><br><span class="line">    if (file_exists($fileName)) &#123;</span><br><span class="line">        while (!gzeof($file)) &#123;</span><br><span class="line">            yield iconv(&quot;gb2312&quot;, &quot;utf-8&quot;, gzgets($file));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        echo &apos;文件不存在：&apos; . $fileName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>脚本还不算完美，但是能满足需求，现在导一遍一共花费时间：212s。算是在可以接受的范围内。</p>
+<h2 id="花絮："><a href="#花絮：" class="headerlink" title="花絮："></a>花絮：</h2><pre><code>测试的时候，本地环境的windows版Redis在1000w以后会出现崩溃，看提示是因为导入量过大，触发60s内超过10000条就备份的指令。所以本地测试大量数据的脚本的时候，需把配置文件中自动备份命令注释掉。
+</code></pre>
       
     </div>
     
@@ -386,8 +432,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -403,7 +458,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -416,7 +471,7 @@
               <div class="site-state-item site-state-tags">
                 
                   <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-name">tags</span>
                 
               </div>
             
@@ -438,6 +493,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备工作："><span class="nav-number">1.</span> <span class="nav-text">准备工作：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#花絮："><span class="nav-number"></span> <span class="nav-text">花絮：</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -462,7 +533,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
