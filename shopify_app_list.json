@@ -2,6 +2,13 @@
     {
         "name": "LitaCat ‑ Image Precision Ai",
         "url": "https://apps.shopify.com/image-precision-ai",
-        "img_url": "https://vip.helloimg.com/i/2024/03/24/65ffcf610dac8.jpg"
+        "img_url": "https://vip.helloimg.com/i/2024/03/24/65ffcf610dac8.jpg",
+        "key": "image-precision-ai"
+    },
+    {
+        "name": "LitaCat ‑ Page Watermark",
+        "url": "https://apps.shopify.com/page-watermark",
+        "img_url": "https://vip.helloimg.com/i/2024/04/14/661b99376839b.png",
+        "key": "page-watermark"
     }
 ]
